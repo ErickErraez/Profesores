@@ -1,0 +1,50 @@
+<div id="imageBackground">
+  <br>
+  <div class="container">
+    <h1 align="center" class="title">Catalogo de Profesores</h1>
+    <div class="row">
+      <div class="col-md-7">
+        <br>
+        <h2 class="titleProfesor">Profesores</h2>
+        <ul class="list-group">
+          <ng-container>
+            <li class="list-group-item" *ngFor="let teacher of teachers">
+              <div class="row">
+                <div class="col-2">
+                  <img id="homeAvatarPicture" src="">
+                </div>
+                <div class="col-6">
+                  <a routerLink="/profesores/{{teacher.idTeacher}}">
+                    <h3>{{teacher.name}}</h3>
+                  </a>
+                  <Small>Fecha Creacion: {{teacher.id | date:'short' | uppercase}}</Small>
+                  <br>
+                  <div *ngFor="let prueba of this.social">
+                    <Small>Fecha Creacion: {{prueba.nickname}} </Small>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ng-container>
+        </ul>
+      </div>
+      <div class="col-md-5">
+        <br>
+        <h2 class="titleProfesor">Cursos</h2>
+        <ng-container *ngFor="let course of courses">
+          <div class="alert-warning padding"><a routerLink="/cursos/{{course.id}}">
+              <h3>{{course.name}}</h3>
+            </a>
+            <br>
+            <p [innerHtml]='course.project'></p>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+  <br>
+  <br>
+  <div class="container-fluid footer">
+    ...
+  </div>
+</div>

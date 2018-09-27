@@ -1,0 +1,49 @@
+<br><br>
+<div class="container">
+  <div class="row">
+    <div class="col-1"></div>
+    <div class="col-10">
+      <div class="card ">
+        <div class="card-header text-center">
+          <h2>
+            <b>
+              Formulario de Curso
+            </b>
+          </h2>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-1"></div>
+            <div class="col-10">
+              <form>
+                <div class="form-group">
+                  <b>
+                    <label for="formGroupExampleInput"> Nombre del Curso:</label>
+                    <input name="nombre" type="text" class="form-control" id="name" placeholder="Ingrese Nombre">
+                  </b>
+                </div>
+                <div class="form-group">
+                  <b>
+                    <label for="exampleFormControlTextarea1">Temas del Curso: </label>
+                    <textarea [(ngModel)]="temario" name="temario" class="form-control" id="temario" rows="5"></textarea>
+                  </b>
+                </div>
+                <div class="form-group">
+                  <b>
+                    <label for="formGroupExampleInput"> Proyecto del Curso:</label>
+                    <input name="proyecto" type="text" class="form-control" id="proyecto" placeholder="Ingrese Nombre del Proyecto">
+                  </b>
+                </div>
+                <div class="form-group">
+                  <button type="submit" (click)="guardarLugar()" class="btn btn-primary">Enviar</button>
+                  <button type="submit" routerLink="/" class="btn btn-danger">Cancelar</button>
+                </div>
+              </form>
+            </div>
+            <div class="col-1"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

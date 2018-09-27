@@ -1,0 +1,32 @@
+#imageBackground {
+  background: url("../../assets/background1.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.padding {
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.titleProfesor {
+  color: white;
+}
+
+.title {
+  color: white;
+}
+
+#homeAvatarPicture {
+  max-width: 70px;
+}
+
+#facebook {
+  color: #3b5998;
+}
+
+.footer {
+  background-color: black;
+}
