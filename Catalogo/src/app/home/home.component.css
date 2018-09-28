@@ -21,12 +21,14 @@
 
 #homeAvatarPicture {
   max-width: 70px;
+  max-height: 70px;
+}
+
+#homeSocialPicture{
+  max-width: 30px;
+  max-height: 30px;
 }
 
 #facebook {
   color: #3b5998;
-}
-
-.footer {
-  background-color: black;
 }

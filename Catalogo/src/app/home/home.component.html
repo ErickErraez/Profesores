@@ -8,19 +8,28 @@
         <h2 class="titleProfesor">Profesores</h2>
         <ul class="list-group">
           <ng-container>
-            <li class="list-group-item" *ngFor="let teacher of teachers">
+            <li class="list-group-item" *ngFor="let teacher of teachers; let i=index;">
               <div class="row">
                 <div class="col-2">
-                  <img id="homeAvatarPicture" src="">
+                  <img *ngIf="teacher.avatar != 'null'" id="homeAvatarPicture" src="/v1/teachers/{{i+1}}/images">
+                  <img *ngIf="teacher.avatar == 'null'" id="homeAvatarPicture" src="../../assets/picture.jpg">
                 </div>
-                <div class="col-6">
+                <div class="col-10">
+
                   <a routerLink="/profesores/{{teacher.idTeacher}}">
                     <h3>{{teacher.name}}</h3>
                   </a>
-                  <Small>Fecha Creacion: {{teacher.id | date:'short' | uppercase}}</Small>
-                  <br>
-                  <div *ngFor="let prueba of this.social">
-                    <Small>Fecha Creacion: {{prueba.nickname}} </Small>
+                  <div class="row" *ngFor="let nick of teacher.teacherSocialMedias">
+                    <div class="col-8">
+                      <Small>
+                        <img *ngIf="nick.socialMedia.name == 'Twiter'" id="homeSocialPicture" src="/v1/socialMedias/1/images">
+                        <img *ngIf="nick.socialMedia.name == 'Facebook'" id="homeSocialPicture" src="/v1/socialMedias/2/images">
+                        <img *ngIf="nick.socialMedia.name == 'Youtube'" id="homeSocialPicture" src="/v1/socialMedias/3/images">
+                        <img *ngIf="nick.socialMedia.name == 'Instagram'" id="homeSocialPicture" src="/v1/socialMedias/4/images">
+                        {{nick.socialMedia.name}}:
+                        {{nick.nickname}} </Small>
+                      <br>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -32,10 +41,10 @@
         <br>
         <h2 class="titleProfesor">Cursos</h2>
         <ng-container *ngFor="let course of courses">
-          <div class="alert-warning padding"><a routerLink="/cursos/{{course.id}}">
+          <div class="alert-warning padding">
+            <a routerLink="/cursos/{{course.idCourse}}">
               <h3>{{course.name}}</h3>
             </a>
-            <br>
             <p [innerHtml]='course.project'></p>
           </div>
         </ng-container>
@@ -44,7 +53,6 @@
   </div>
   <br>
   <br>
-  <div class="container-fluid footer">
-    ...
-  </div>
+  <br>
+  <br>
 </div>
