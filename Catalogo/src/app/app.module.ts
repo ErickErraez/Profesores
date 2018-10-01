@@ -12,6 +12,8 @@ import { HomeComponent } from './home/home.component';
 import { ProfesoresComponent } from './profesores/profesores.component';
 import { CursosComponent } from './cursos/cursos.component';
 import { RouterModule, Routes } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 
 const appRoutes: Routes = [
@@ -38,7 +40,8 @@ const appRoutes: Routes = [
     NgbModule.forRoot(),
     BootstrapModalModule.forRoot({ container: document.body }),
     HttpClientModule,
-    HttpModule
+    HttpModule,
+    BrowserAnimationsModule,
 
   ],
   providers: [],

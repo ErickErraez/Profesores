@@ -12,6 +12,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -68,7 +69,7 @@ public class TeacherController {
 
 	// FIND BY ID
 	@RequestMapping(value = "/teachers/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
-	public ResponseEntity<Teacher> getCourseById(@PathVariable("id") Long id) {
+	public ResponseEntity<Teacher> getTeacherById(@PathVariable("id") Long id) {
 		Teacher teacher = _teacherService.findById(id);
 		if (teacher == null) {
 			return new ResponseEntity(HttpStatus.NOT_FOUND);
@@ -76,6 +77,28 @@ public class TeacherController {
 		}
 		return new ResponseEntity<Teacher>(teacher, HttpStatus.OK);
 	}
+	
+	//POST
+	
+	@RequestMapping(value = "/teachers", method = RequestMethod.POST, headers = "Accept=application/json")
+	public ResponseEntity<?> createTeacher(@RequestBody Teacher teacher,
+			UriComponentsBuilder uriComponentsBuilder) {
+
+		if (teacher.getName().equals(null) || teacher.getName().isEmpty()) {
+			return new ResponseEntity(new CustomErrorType("Teacher name is required"), HttpStatus.CONFLICT);
+		}
+		if (_teacherService.findByName(teacher.getName()) != null) {
+			return new ResponseEntity(HttpStatus.NO_CONTENT);
+		}
+
+		_teacherService.saveTeacher(teacher);
+		
+		 HttpHeaders headers = new HttpHeaders();
+	        headers.setLocation(uriComponentsBuilder.path("/v1/teachers/{id}").buildAndExpand(teacher.getIdTeacher()).toUri());
+	        return new ResponseEntity<String>(headers, HttpStatus.CREATED);
+	}
+
+	
 
 	// DELETE
 	@RequestMapping(value = "/teachers/{id}", method = RequestMethod.DELETE, headers = "Accept=application/json")
@@ -176,7 +199,8 @@ public class TeacherController {
 		}
 
 	}
-
+	
+//DELETE IMAGES
 	@RequestMapping(value = "/teachers/{id_teacher}/images", method = RequestMethod.DELETE, headers = "Accept=application/json")
 	public ResponseEntity<?> deleteTeacherImage(@PathVariable("id_teacher") Long idTeacher) {
 		if (idTeacher == null) {
@@ -206,7 +230,7 @@ public class TeacherController {
 
 		return new ResponseEntity<Teacher>(HttpStatus.NO_CONTENT);
 	}
-
+//TEACHERSOCIALMEDIA
 	@RequestMapping(value = "teachers/socialMedias", method = RequestMethod.PUT, headers = "Accept=application/json")
 	public ResponseEntity<?> assignTeacherSocialMedia(@RequestBody Teacher teacher,
 			UriComponentsBuilder uriComponentsBuilder) {
