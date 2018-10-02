@@ -24,9 +24,9 @@
                         <label for="formGroupExampleInput"> Avatar: </label>
                       </div>
                       <div class="col-6">
-                        <img *ngIf="teacher.avatar != 'null' && !croppedImage" id="homeAvatarPicture" src="/v1/teachers/{{id}}/images">
-                        <img *ngIf="teacher.avatar == 'null' && !croppedImage" id="homeAvatarPicture" src="../../assets/picture.jpg">
-                        <img [src]="croppedImage" *ngIf="croppedImage"><br>
+                        <img *ngIf="id !== 'new' && teacher.avatar !== 'null' " id="homeAvatarPicture" src="/v1/teachers/{{id}}/images">
+                        <img *ngIf="id == 'new' || teacher.avatar == 'null'" id="homeAvatarPicture" src="../../assets/picture.jpg">
+                        <br>
                         <input type="file" (change)="cargandoImagen($event.target.files)" multiple>
                       </div>
                     </div>
@@ -37,7 +37,7 @@
                 <div class="form-group">
                   <b>
                     <label for="formGroupExampleInput"> Nombre:</label>
-                    <input [(ngModel)]="teacher.name" onchange="Warning()" name="name" type="text" class="form-control" id="name"
+                    <input [(ngModel)]="teacher.name" name="name" type="text" class="form-control" id="name"
                       placeholder="Ingrese Nombre">
                   </b>
                 </div>
@@ -63,7 +63,7 @@
                     <label for="formGroupExampleInput" nfg> Red Social:</label>
                     <select class="custom-select" id="inputGroupSelect01" [(ngModel)]="teacher.idTeacherSocialMedia"
                       name="teacher.idTeacherSocialMedia">
-                      <option *ngFor="let redSocial of red" value={{redSocial.idSocialMedia}}>{{redSocial.name}}</option>
+                      <option *ngFor="let redSocial of red" name="social" value={{redSocial.idSocialMedia}}>{{redSocial.name}}</option>
                     </select>
                   </b>
                 </div>
@@ -80,7 +80,7 @@
                         <img *ngIf="nick.socialMedia.name == 'Facebook'" id="homeSocialPicture" src="/v1/socialMedias/2/images">
                         <img *ngIf="nick.socialMedia.name == 'Youtube'" id="homeSocialPicture" src="/v1/socialMedias/3/images">
                         <img *ngIf="nick.socialMedia.name == 'Instagram'" id="homeSocialPicture" src="/v1/socialMedias/4/images">
-                        <a>{{nick.nickname}}</a>
+                        <a (click)="valueText=nick.nickname">{{nick.nickname}}</a>
                       </Small>
                       <br>
                     </div>

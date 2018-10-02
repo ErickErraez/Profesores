@@ -8,10 +8,10 @@
         <h2 class="titleProfesor">Profesores</h2>
         <ul class="list-group">
           <ng-container>
-            <li class="list-group-item" *ngFor="let teacher of teachers; let i=index;">
+            <li class="list-group-item" *ngFor="let teacher of teachers">
               <div class="row">
                 <div class="col-2">
-                  <img *ngIf="teacher.avatar != 'null'" id="homeAvatarPicture" src="/v1/teachers/{{i+1}}/images">
+                  <img *ngIf="teacher.avatar != 'null'" id="homeAvatarPicture" src="/v1/teachers/{{teacher.idTeacher}}/images">
                   <img *ngIf="teacher.avatar == 'null'" id="homeAvatarPicture" src="../../assets/picture.jpg">
                 </div>
                 <div class="col-10">
