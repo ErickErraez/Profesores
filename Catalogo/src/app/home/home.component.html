@@ -51,7 +51,8 @@
           <div class="alert-warning padding">
             <div class="row">
               <div class="col-2">
-                <img id="cursosIcon" src="../../assets/Cursos.png">
+                <img *ngIf="course.icon !== 'null'" id="cursosIcon" src="/v1/course/{{course.idCourse}}/icons">
+                <img *ngIf="course.icon === 'null'" id="cursosIcon" src="../../assets/Cursos.png">
               </div>
               <div class="col-10">
                 <a routerLink="/cursos/{{course.idCourse}}">
@@ -65,8 +66,6 @@
       </div>
     </div>
   </div>
-  <br>
-  <br>
   <br>
   <br>
 </div>

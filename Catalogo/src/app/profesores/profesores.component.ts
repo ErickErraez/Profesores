@@ -14,7 +14,7 @@ export class ProfesoresComponent {
   imageChangedEvent: any = '';
   public respuestaImagenEnviada;
   public resultadoCarga;
-  croppedImage: any = '';
+  course: any = [];
   idSocialMedia: any;
   id: any = null;
   valueText: any = '';
@@ -48,6 +48,11 @@ export class ProfesoresComponent {
     }, error => {
       console.log(error);
     });
+
+    this.http.get('v1/courses').subscribe((course) => {
+      this.course = course.json();
+      console.log(this.course);
+    });
   }
 
 
@@ -61,12 +66,8 @@ export class ProfesoresComponent {
     }
   }
 
-  sendValor(prueba) {
-    this.valueText = prueba;
-  }
-
   showSuccess(teacherName) {
-    this.toastr.success('Guardado con exito!', 'Profesor ' + teacherName + '!', { timeOut: 2000 });
+    this.toastr.success('Guardado con exito!', 'Profesor ' + teacherName + '!');
   }
 
   guardarProfesor() {
@@ -83,7 +84,6 @@ export class ProfesoresComponent {
           avatar: 'null'
         };
         this.http.post(this.urlTeacher, this.teacherPost).subscribe((result) => {
-
           console.log(result);
           if (result.statusText === 'No Content') {
             this.toastr.error('El Profesor ' + this.teacher.name + ' ya existe', 'Ocurrio un Error');
@@ -108,7 +108,7 @@ export class ProfesoresComponent {
                   console.log(this.respuestaImagenEnviada);
                   this.router.navigate(['/profesores/' + this.teacher.idTeacher]);
                   this.showSuccess(this.teacher.name);
-                  setTimeout(function () { location.reload(true); }, 3000);
+                  setTimeout(function () { location.reload(true); }, 2000);
                   if (this.respuestaImagenEnviada <= 1) {
                     console.log('Error en el servidor');
                   } else {
@@ -128,7 +128,7 @@ export class ProfesoresComponent {
                   } else {
                     this.router.navigate(['/profesores/' + this.teacher.idTeacher]);
                     this.showSuccess(this.teacher.name);
-                    setTimeout(function () { location.reload(true); }, 3000);
+                    setTimeout(function () { location.reload(true); }, 2000);
                   }
                 });
               }
@@ -139,7 +139,7 @@ export class ProfesoresComponent {
                   } else {
                     this.router.navigate(['/profesores/' + this.teacher.idTeacher]);
                     this.showSuccess(this.teacher.name);
-                    setTimeout(function () { location.reload(true); }, 3000);
+                    setTimeout(function () { location.reload(true); }, 2000);
                   }
                 });
               }
@@ -190,7 +190,7 @@ export class ProfesoresComponent {
             } else {
               this.router.navigate(['/profesores/' + this.teacher.idTeacher]);
               this.showSuccess(this.teacher.name);
-              setTimeout(function () { location.reload(true); }, 3000);
+              setTimeout(function () { location.reload(true); }, 2000);
             }
           });
         }
@@ -201,16 +201,16 @@ export class ProfesoresComponent {
             } else {
               this.router.navigate(['/profesores/' + this.teacher.idTeacher]);
               this.showSuccess(this.teacher.name);
-              setTimeout(function () { location.reload(true); }, 3000);
+              setTimeout(function () { location.reload(true); }, 2000);
             }
           });
         }
-        if (this.imageNewUser !== undefined) {
+        if (this.imageNewUser !== undefined && this.valueText !== '') {
           this.servicio.postFileImagen(this.imageNewUser, this.teacher.idTeacher).subscribe(response => {
             this.respuestaImagenEnviada = response;
             this.router.navigate(['/profesores/' + this.teacher.idTeacher]);
             this.showSuccess(this.teacher.name);
-            setTimeout(function () { location.reload(true); }, 3000);
+            setTimeout(function () { location.reload(true); }, 2000);
             if (this.respuestaImagenEnviada <= 1) {
               console.log('Error en el servidor');
             } else {

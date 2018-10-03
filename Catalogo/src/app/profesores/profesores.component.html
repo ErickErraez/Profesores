@@ -23,16 +23,14 @@
                         <label for="formGroupExampleInput"> Avatar: </label>
                       </div>
                       <div class="col-6">
-                        <img *ngIf="id !== 'new' && teacher.avatar !== 'null' " id="homeAvatarPicture" src="/v1/teachers/{{id}}/images">
+                        <img *ngIf="id !== 'new' && teacher.avatar !== 'null' " id="homeAvatarPicture" src="/v1/teachers/{{this.id}}/images">
                         <img *ngIf="id == 'new' || teacher.avatar == 'null'" id="homeAvatarPicture" src="../../assets/picture.jpg">
                         <br>
                         <input type="file" (change)="cargandoImagen($event.target.files)" multiple>
                       </div>
                     </div>
-
                   </b>
                 </div>
-
                 <div class="form-group">
                   <b>
                     <label for="formGroupExampleInput"> Nombre:</label>
@@ -43,9 +41,9 @@
                 <div class="form-group">
                   <b>
                     <label for="formGroupExampleInput"> Curso:</label>
-                    <select class="custom-select" id="inputGroupSelect01" [(ngModel)]="teacher.idTeacherSocialMedia"
-                      name="idTeacherSocialMedia">
-                      <option *ngFor="let nick of teacher.teacherSocialMedias" value={{nick.socialMedia.idSocialMedia}}>{{nick.socialMedia.name}}</option>
+                    <select class="custom-select" id="inputGroupSelect01" name="idTeacherSocialMedia">
+                      <!--[(ngModel)]="teacher.idTeacherSocialMedia"-->
+                      <option *ngFor="let item of this.course" value={{item.idCourse}}>{{item.name}}</option>
                     </select>
                   </b>
                 </div>
@@ -79,7 +77,7 @@
                 <br>
                 <div class="form-group">
                   <button type="submit" (click)="guardarProfesor()" class="btn btn-primary">Enviar</button>
-                  <button type="submit" routerLink="/" class="btn btn-danger">Cancelar</button>
+                  <button type="submit" routerLink="/home" class="btn btn-danger">Cancelar</button>
                 </div>
               </form>
             </div>

@@ -31,6 +31,8 @@ export class HomeComponent {
 
 
   constructor(private http: Http) {
+
+
     this.http.get(this.urlCourse).subscribe((course) => {
       this.courses = course.json();
       this.state = 'final';
@@ -42,6 +44,7 @@ export class HomeComponent {
     }, error => {
       console.log(error);
     });
+
 
   }
   start(e) {

@@ -5,6 +5,7 @@ import java.util.List;
 import edu.yavirac.profesores.model.Course;;
 
 public interface CourseDao {
+	
 	void saveCourse(Course course);
 	
 	void deleteCourseById(Long idCourse);

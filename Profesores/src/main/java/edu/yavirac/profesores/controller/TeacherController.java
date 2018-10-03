@@ -77,12 +77,11 @@ public class TeacherController {
 		}
 		return new ResponseEntity<Teacher>(teacher, HttpStatus.OK);
 	}
-	
-	//POST
-	
+
+	// POST
+
 	@RequestMapping(value = "/teachers", method = RequestMethod.POST, headers = "Accept=application/json")
-	public ResponseEntity<?> createTeacher(@RequestBody Teacher teacher,
-			UriComponentsBuilder uriComponentsBuilder) {
+	public ResponseEntity<?> createTeacher(@RequestBody Teacher teacher, UriComponentsBuilder uriComponentsBuilder) {
 
 		if (teacher.getName().equals(null) || teacher.getName().isEmpty()) {
 			return new ResponseEntity(new CustomErrorType("Teacher name is required"), HttpStatus.CONFLICT);
@@ -92,13 +91,13 @@ public class TeacherController {
 		}
 
 		_teacherService.saveTeacher(teacher);
-		
-		 HttpHeaders headers = new HttpHeaders();
-	        headers.setLocation(uriComponentsBuilder.path("/v1/teachers/{id}").buildAndExpand(teacher.getIdTeacher()).toUri());
-	        return new ResponseEntity<String>(headers, HttpStatus.CREATED);
-	}
 
-	
+		HttpHeaders headers = new HttpHeaders();
+		headers.setLocation(
+				uriComponentsBuilder.path("/v1/teachers/{id}").buildAndExpand(teacher.getIdTeacher()).toUri());
+		return new ResponseEntity<Long>(teacher.getIdTeacher(),HttpStatus.CREATED);
+
+	}
 
 	// DELETE
 	@RequestMapping(value = "/teachers/{id}", method = RequestMethod.DELETE, headers = "Accept=application/json")
@@ -199,8 +198,8 @@ public class TeacherController {
 		}
 
 	}
-	
-//DELETE IMAGES
+
+	// DELETE IMAGES
 	@RequestMapping(value = "/teachers/{id_teacher}/images", method = RequestMethod.DELETE, headers = "Accept=application/json")
 	public ResponseEntity<?> deleteTeacherImage(@PathVariable("id_teacher") Long idTeacher) {
 		if (idTeacher == null) {
@@ -230,13 +229,31 @@ public class TeacherController {
 
 		return new ResponseEntity<Teacher>(HttpStatus.NO_CONTENT);
 	}
-//TEACHERSOCIALMEDIA
+
+	// ACTUALIZAR TEACHERSOCIALMEDIA
 	@RequestMapping(value = "teachers/socialMedias", method = RequestMethod.PUT, headers = "Accept=application/json")
 	public ResponseEntity<?> assignTeacherSocialMedia(@RequestBody Teacher teacher,
 			UriComponentsBuilder uriComponentsBuilder) {
 		if (teacher.getIdTeacher() == null) {
 			return new ResponseEntity(new CustomErrorType("We nee almost id_teacher, id_social_media and nickname"),
 					HttpStatus.NO_CONTENT);
+		} else {
+			if (teacher.getIdTeacher() == null || teacher.getIdTeacher() <= 0) {
+				return new ResponseEntity(new CustomErrorType("idTeacher is required"), HttpStatus.CONFLICT);
+			}
+
+			Teacher currentTeacher = _teacherService.findById(teacher.getIdTeacher());
+			if (currentTeacher == null) {
+				return new ResponseEntity(HttpStatus.NO_CONTENT);
+			}
+
+			if (teacher.getName().equals(null) || teacher.getName().isEmpty()) {
+				return new ResponseEntity(new CustomErrorType("Error missing fields"), HttpStatus.CONFLICT);
+			}
+
+			currentTeacher.setName(teacher.getName());
+
+			_teacherService.updateTeacher(currentTeacher);
 		}
 
 		Teacher teacherSaved = _teacherService.findById(teacher.getIdTeacher());
@@ -312,6 +329,7 @@ public class TeacherController {
 		}
 
 		_teacherService.updateTeacher(teacherSaved);
+
 		return new ResponseEntity<Teacher>(teacherSaved, HttpStatus.OK);
 
 	}
