@@ -1,9 +1,10 @@
 <div id="imageBackground">
   <br>
-  <div class="container">
+  <div class="container" [@animable]="state">
     <h1 align="center" class="title">Catalogo de Profesores</h1>
+    <br>
     <div class="row">
-      <div class="col-md-7">
+      <div class="col-md-7" *ngIf="teachers">
         <br>
         <h2 class="titleProfesor">Profesores</h2>
         <ul class="list-group">
@@ -37,15 +38,28 @@
           </ng-container>
         </ul>
       </div>
+      <div class="col-md-7" *ngIf="!teachers">
+        <h2 class="titleProfesor">Profesores</h2>
+        <div class="alert-warning padding">
+          <h3>Aun no hay Profesores Disponibles</h3>
+        </div>
+      </div>
       <div class="col-md-5">
         <br>
         <h2 class="titleProfesor">Cursos</h2>
         <ng-container *ngFor="let course of courses">
           <div class="alert-warning padding">
-            <a routerLink="/cursos/{{course.idCourse}}">
-              <h3>{{course.name}}</h3>
-            </a>
-            <p [innerHtml]='course.project'></p>
+            <div class="row">
+              <div class="col-2">
+                <img id="cursosIcon" src="../../assets/Cursos.png">
+              </div>
+              <div class="col-10">
+                <a routerLink="/cursos/{{course.idCourse}}">
+                  <h3>{{course.name}}</h3>
+                </a>
+                <p [innerHtml]='course.project'></p>
+              </div>
+            </div>
           </div>
         </ng-container>
       </div>

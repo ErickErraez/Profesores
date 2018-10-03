@@ -14,6 +14,7 @@ import { HomeComponent } from './home/home.component';
 import { ProfesoresComponent } from './profesores/profesores.component';
 import { CursosComponent } from './cursos/cursos.component';
 import { RouterModule, Routes } from '@angular/router';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -28,7 +29,8 @@ const appRoutes: Routes = [
     AppComponent,
     HomeComponent,
     ProfesoresComponent,
-    CursosComponent
+    CursosComponent,
+    NotFoundComponent
   ],
   imports: [
     ReactiveFormsModule,

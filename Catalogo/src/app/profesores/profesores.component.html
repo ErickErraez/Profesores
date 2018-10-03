@@ -16,7 +16,6 @@
             <div class="col-1"></div>
             <div class="col-10">
               <form>
-
                 <div class="form-group text-center">
                   <b>
                     <div class="row">
@@ -48,17 +47,9 @@
                       name="idTeacherSocialMedia">
                       <option *ngFor="let nick of teacher.teacherSocialMedias" value={{nick.socialMedia.idSocialMedia}}>{{nick.socialMedia.name}}</option>
                     </select>
-                    <!--
-  <select class="form-control" id="idLink" name="idLink" [(ngModel)]="entidadSeleccionada.idLink">
-                  <option value="" selected>Seleccione...</option>
-                  <option *ngFor="let link of entidadesAsignacionLinkDLink" value={{link.id}}>{{link.descripcion}}</option>
-                </select>
-
-                    -->
                   </b>
                 </div>
                 <div class="form-group">
-
                   <b>
                     <label for="formGroupExampleInput" nfg> Red Social:</label>
                     <select class="custom-select" id="inputGroupSelect01" [(ngModel)]="teacher.idTeacherSocialMedia"
@@ -68,7 +59,6 @@
                   </b>
                 </div>
                 <div class="form-group">
-
                   <b>
                     <label for="formGroupExampleInput"> NickName:</label>
                     <input name="valueText" [(ngModel)]="valueText" type="text" class="form-control" placeholder="Ingrese Nombre">
@@ -109,9 +99,7 @@
     </button>
   </div>
   <div class="modal-body">
-    <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]=" 1/ 1"
-      [resizeToWidth]="128" format="png" (imageCroppedBase64)="imageCropped($event)" (imageLoaded)="imageLoaded()"
-      (loadImageFailed)="loadImageFailed()"></image-cropper>
+    <img src="">
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-outline-dark" (click)="modal.dismiss('Cross click')">Guardar</button>
