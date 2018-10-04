@@ -21,7 +21,7 @@ export class GuardGuard implements CanActivate {
         }, 500);
         this.userServices.getUsersById(response.uid).valueChanges().subscribe((data) => {
           this.user = data;
-          if (this.user.rol === 'Profesor') {
+          if (this.user.rol === 'Profesor' || this.user.rol === 'Admin') {
             this.loggedIn = true;
           } else {
             this.loggedIn = false;

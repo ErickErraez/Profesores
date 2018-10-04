@@ -33,10 +33,8 @@ export class ProfesoresComponent {
 
     this.id = this.root.snapshot.params['id'];
     if (this.id !== 'new') {
-      console.log(this.id);
       this.http.get(this.urlTeacher + this.id).subscribe((data) => {
         this.teacher = data.json();
-        console.log(this.teacher);
         this.toastr.success(this.teacher.name, 'Bienvenido');
       }, error => {
         console.log(error);
@@ -52,7 +50,6 @@ export class ProfesoresComponent {
 
     this.http.get('v1/courses').subscribe((course) => {
       this.course = course.json();
-      console.log(this.course);
     });
   }
 
@@ -77,11 +74,6 @@ export class ProfesoresComponent {
     this.idOfCourse = document.getElementsByName('courseSelected')[0];
 
     if (this.id === 'new') {
-      console.log(this.teacher.name);
-      console.log(this.idOfCourse.text);
-      console.log(this.imageNewUser);
-      console.log(this.valueText);
-      console.log(this.course.idCourse);
       // tslint:disable-next-line:max-line-length
       if (this.teacher.name === undefined || this.idOfCourse.text === '' || this.imageNewUser === undefined || this.valueText === '' || this.value.text === undefined || this.course.idCourse === undefined) {
         this.toastr.error('Primero debes llenar todos los campos', 'Ocurrio un Error');
@@ -267,7 +259,7 @@ export class ProfesoresComponent {
           });
         }
         // tslint:disable-next-line:max-line-length
-        if (this.course.idCourse !== undefined ) {
+        if (this.course.idCourse !== undefined) {
           this.http.put('/v1/courses/teachers', teacherCourse).subscribe((courseData) => {
             this.router.navigate(['/profesores/' + this.teacher.idTeacher]);
             this.showSuccess(this.teacher.name);

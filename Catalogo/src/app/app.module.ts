@@ -29,11 +29,13 @@ import { AuthenticationService } from './services/authentication.service';
 import { IconService } from './services/icon.service';
 import { ImagenService } from './services/imagen.service';
 import { UserService } from './services/user.service';
+import { ProfileComponent } from './profile/profile.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'registro', component: RegistroComponent },
+  { path: 'profile', component: ProfileComponent, canActivate: [GuardGuard] },
   { path: 'home', component: HomeComponent },
   { path: 'profesores/:id', component: ProfesoresComponent, canActivate: [GuardGuard] },
   { path: 'cursos/:id', component: CursosComponent, canActivate: [GuardGuard] },
@@ -50,7 +52,8 @@ const appRoutes: Routes = [
     CursosComponent,
     NotFoundComponent,
     LoginComponent,
-    RegistroComponent
+    RegistroComponent,
+    ProfileComponent
   ],
   imports: [
     ReactiveFormsModule,
