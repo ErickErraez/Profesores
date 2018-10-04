@@ -44,7 +44,7 @@
           <h3>Aun no hay Profesores Disponibles</h3>
         </div>
       </div>
-      <div class="col-md-5">
+      <div class="col-md-5" *ngIf="courses">
         <br>
         <h2 class="titleProfesor">Cursos</h2>
         <ng-container *ngFor="let course of courses">
@@ -58,11 +58,19 @@
                 <a routerLink="/cursos/{{course.idCourse}}">
                   <h3>{{course.name}}</h3>
                 </a>
+                <h5 *ngIf="teachers && course.teacher !== null"> <i class="fas fa-chalkboard-teacher"></i> <span>..</span><b>Profesor:</b>
+                  {{course.teacher.name}}</h5>
                 <p [innerHtml]='course.project'></p>
               </div>
             </div>
           </div>
         </ng-container>
+      </div>
+      <div class="col-md-5" *ngIf="!courses">
+        <h2 class="titleProfesor">Cursos</h2>
+        <div class="alert-warning padding">
+          <h3>Aun no hay Cursos Disponibles</h3>
+        </div>
       </div>
     </div>
   </div>

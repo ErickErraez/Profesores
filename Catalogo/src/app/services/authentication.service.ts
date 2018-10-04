@@ -10,7 +10,7 @@ import { ToastrService } from 'ngx-toastr';
 export class AuthenticationService {
 
   constructor(private angularFireAuth: AngularFireAuth, private toastr: ToastrService) {
-
+    this.getStatus();
   }
 
   getStatus() {
@@ -36,5 +36,7 @@ export class AuthenticationService {
     return this.angularFireAuth.auth.signOut();
   }
 
-
+  getUser() {
+    return this.angularFireAuth.auth;
+  }
 }

@@ -95,7 +95,7 @@ public class TeacherController {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setLocation(
 				uriComponentsBuilder.path("/v1/teachers/{id}").buildAndExpand(teacher.getIdTeacher()).toUri());
-		return new ResponseEntity<Long>(teacher.getIdTeacher(),HttpStatus.CREATED);
+		return new ResponseEntity<Long>(teacher.getIdTeacher(), HttpStatus.CREATED);
 
 	}
 

@@ -27,14 +27,19 @@ import org.springframework.web.util.UriComponentsBuilder;
 import edu.yavirac.profesores.model.Course;
 import edu.yavirac.profesores.model.Teacher;
 import edu.yavirac.profesores.service.CourseService;
+import edu.yavirac.profesores.service.TeacherService;
 import edu.yavirac.profesores.util.CustomErrorType;
 
 @Controller
 @RequestMapping("/v1")
 
 public class CourseController {
+	
 	@Autowired
 	private CourseService _courseService;
+	
+	@Autowired
+	private TeacherService _teacherService;
 
 	// GET
 	@RequestMapping(value = "/courses", method = RequestMethod.GET, headers = "Accept=application/json")
@@ -189,6 +194,8 @@ public class CourseController {
 					HttpStatus.CONFLICT);
 		}
 	}
+	
+	//GET COURSE ICON
 
 	@RequestMapping(value = "/course/{id_course}/icons", method = RequestMethod.GET)
 	public ResponseEntity<byte[]> getTeacherImage(@PathVariable("id_course") Long idCourse) {
@@ -221,5 +228,26 @@ public class CourseController {
 		}
 
 	}
+	
+	//ASSIGN TEACHER TO COURSE
+		@RequestMapping(value="/courses/teachers", method = RequestMethod.PUT, headers="Accept=application/json")
+		public ResponseEntity<Course> assignTeacherToCourse(@RequestBody Course course, UriComponentsBuilder ucBuilder){
+			System.out.println(course);
+			if (course.getIdCourse() == null || course.getTeacher().getIdTeacher() == null) {
+				return new ResponseEntity(new CustomErrorType("We need almost id_course and id_teacher "),HttpStatus.CONFLICT);
+			}
+			Course courseSaved = _courseService.findById(course.getIdCourse());
+			if (courseSaved == null) {
+				return new ResponseEntity(new CustomErrorType("The id_course: " + course.getIdCourse() + " not found."),HttpStatus.CONFLICT);
+			}
+			Teacher teacher = _teacherService.findById(course.getTeacher().getIdTeacher());
+			if (teacher == null) {
+				return new ResponseEntity(new CustomErrorType("The id_teacher: " + course.getTeacher().getIdTeacher() + " not found."),HttpStatus.CONFLICT);
+			}
+			courseSaved.setTeacher(teacher);
+			_courseService.updateCourse(courseSaved);
+
+			return new ResponseEntity<Course>(courseSaved, HttpStatus.OK);
+		}
 
 }

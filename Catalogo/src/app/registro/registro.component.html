@@ -1,3 +1,86 @@
-<p>
-  registro works!
-</p>
+<div class="fondo">
+  <br><br>
+  <div class="container">
+    <div class="row">
+      <div class="col-3"></div>
+      <div class="col-6 text-center">
+        <div class="card ">
+          <div class="card-header text-center">
+            <h2><b>Registro de Usuario</b></h2>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-1"></div>
+              <div class="col-10">
+                <form>
+                  <div class="form-group text-left">
+                    <h5>
+                      <b>
+                        <i id="iconUser" class="fas fa-user"></i>
+                        <label for="formGroupExampleInput"><span>..</span> Nombre:</label>
+                        <input type="text" class="form-control" [(ngModel)]="name" id="name" name="name" placeholder="Ingrese Nombre">
+                      </b>
+                    </h5>
+                  </div>
+                  <div class="form-group text-left">
+                    <h5>
+                      <b>
+                        <i id="iconUser" class="fas fa-user"></i>
+                        <label for="exampleFormControlSelect1">Soy:</label>
+                        <select class="form-control" id="exampleFormControlSelect1" [(ngModel)]="rol" name="rol">
+                          <option>Estudiante</option>
+                          <option>Profesor</option>
+                        </select>
+                      </b>
+                    </h5>
+                  </div>
+                  <div class="form-group text-left">
+                    <h5>
+                      <b>
+                        <i id="iconEmail" class="fas fa-envelope"></i>
+                        <label for="formGroupExampleInput"><span>..</span> Correo Electrónico:</label>
+                        <input type="email" [(ngModel)]="email" class="form-control" id="email" name="email"
+                          placeholder="Ingrese Correo">
+                      </b>
+                    </h5>
+                  </div>
+                  <div class="form-group text-left">
+                    <h5>
+                      <b>
+                        <i id="iconPass" class="fas fa-key"></i>
+                        <label for="formGroupExampleInput"><span>..</span> Contraseña:</label>
+                        <input type="password" class="form-control" [(ngModel)]="password" id="password" name="password"
+                          placeholder="Ingrese Nombre">
+                      </b>
+                    </h5>
+                  </div>
+                  <div class="form-group text-left">
+                    <h5>
+                      <b>
+                        <i id="iconPass" class="fas fa-key"></i>
+                        <label for="formGroupExampleInput"><span>..</span> Repetir Contraseña:</label>
+                        <input type="password" class="form-control" [(ngModel)]="repPassword" id="repPassword" name="repPassword"
+                          placeholder="Ingrese Nombre">
+                      </b>
+                    </h5>
+                  </div>
+                  <br>
+                  <div class="form-group">
+                    <button type="submit" class="btn btn-primary" (click)="register()">Registrar</button>
+                    <button type="submit" class="btn btn-danger" routerLink="/home">Cancelar</button>
+                    <br>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer text-muted">
+            <b>
+              <a id="etiqueta" routerLink="/login"> Ya tienes una Cuenta?</a>
+            </b>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

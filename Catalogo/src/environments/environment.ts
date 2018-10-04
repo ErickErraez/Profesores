@@ -4,12 +4,12 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: 'AIzaSyC4lTrX9FdZzfYHhT32VcjpOZYEwkESRr8',
-    authDomain: 'chat-9ee09.firebaseapp.com',
-    databaseURL: 'https://chat-9ee09.firebaseio.com',
-    projectId: 'chat-9ee09',
-    storageBucket: 'chat-9ee09.appspot.com',
-    messagingSenderId: '742140467717'
+    apiKey: 'AIzaSyCc9oLNwWIWLMSNPCaNhSy1Z0CtJYF1HA0',
+    authDomain: 'catalogoprofesores.firebaseapp.com',
+    databaseURL: 'https://catalogoprofesores.firebaseio.com',
+    projectId: 'catalogoprofesores',
+    storageBucket: 'catalogoprofesores.appspot.com',
+    messagingSenderId: '412929223810'
   }
 };
 

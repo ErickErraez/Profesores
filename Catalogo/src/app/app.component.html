@@ -14,7 +14,22 @@
         <a class="nav-link" routerLink="/cursos/new">Cursos<span class="sr-only">(current)</span></a>
       </li>
     </ul>
-
+    <ul class="nav justify-content-end textColor" *ngIf="!loggedIn">
+      <li class="nav-item">
+        <a class="nav-link textColor" routerLink="/login">Login</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link textColor" routerLink="/registro">Registro</a>
+      </li>
+    </ul>
+    <ul class="nav justify-content-end" *ngIf="loggedIn">
+      <li class="nav-item" *ngIf="logUser">
+        <a class="nav-link textColor">{{this.user.name}}</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link textColor" id="logout" (click)="logout()">Logout</a>
+      </li>
+    </ul>
   </div>
 </nav>
 <router-outlet></router-outlet>

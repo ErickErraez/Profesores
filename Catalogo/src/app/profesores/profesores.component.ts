@@ -16,6 +16,7 @@ export class ProfesoresComponent {
   public resultadoCarga;
   course: any = [];
   idSocialMedia: any;
+  idOfCourse: any;
   id: any = null;
   valueText: any = '';
   urlTeacher: any = '/v1/teachers/';
@@ -73,11 +74,17 @@ export class ProfesoresComponent {
   guardarProfesor() {
 
     this.value = document.getElementsByName('social')[0];
-    this.value.text = '';
-    this.value = document.getElementsByName('social')[0];
+    this.idOfCourse = document.getElementsByName('courseSelected')[0];
+
     if (this.id === 'new') {
-      if (this.teacher.name === undefined) {
-        this.toastr.error('Primero debes llenar tu Nombre', 'Ocurrio un Error');
+      console.log(this.teacher.name);
+      console.log(this.idOfCourse.text);
+      console.log(this.imageNewUser);
+      console.log(this.valueText);
+      console.log(this.course.idCourse);
+      // tslint:disable-next-line:max-line-length
+      if (this.teacher.name === undefined || this.idOfCourse.text === '' || this.imageNewUser === undefined || this.valueText === '' || this.value.text === undefined || this.course.idCourse === undefined) {
+        this.toastr.error('Primero debes llenar todos los campos', 'Ocurrio un Error');
       } else {
         this.teacherPost = {
           name: this.teacher.name,
@@ -101,48 +108,49 @@ export class ProfesoresComponent {
                   }
                 }]
               };
-              if (this.imageNewUser !== undefined && this.valueText !== '' && this.value.text !== undefined) {
-                console.log(this.imageNewUser);
-                this.servicio.postFileImagen(this.imageNewUser, this.IdCreado).subscribe(response => {
-                  this.respuestaImagenEnviada = response;
-                  console.log(this.respuestaImagenEnviada);
+              const teacherCourse = {
+                idCourse: this.course.idCourse,
+                teacher: {
+                  idTeacher: this.IdCreado
+                }
+              };
+              // tslint:disable-next-line:max-line-length
+
+              console.log(this.imageNewUser);
+              this.servicio.postFileImagen(this.imageNewUser, this.IdCreado).subscribe(response => {
+                this.respuestaImagenEnviada = response;
+                console.log(this.respuestaImagenEnviada);
+                this.router.navigate(['/profesores/' + this.teacher.idTeacher]);
+                this.showSuccess(this.teacher.name);
+                setTimeout(function () { location.reload(true); }, 2000);
+                if (this.respuestaImagenEnviada <= 1) {
+                  console.log('Error en el servidor');
+                } else {
+                  if (this.respuestaImagenEnviada.code === 200 && this.respuestaImagenEnviada.status === 'success') {
+                    this.resultadoCarga = 1;
+                  } else {
+                    this.resultadoCarga = 2;
+                  }
+                }
+
+              }, error => {
+                console.log(<any>error);
+              });
+              this.http.put('/v1/teachers/socialMedias', this.teacher).subscribe(Response => {
+                if (Response.statusText === 'No Content') {
+                  this.toastr.error('La Red Social ' + this.valueText + ' ya existe', 'Ocurrio un Error');
+                } else {
                   this.router.navigate(['/profesores/' + this.teacher.idTeacher]);
                   this.showSuccess(this.teacher.name);
                   setTimeout(function () { location.reload(true); }, 2000);
-                  if (this.respuestaImagenEnviada <= 1) {
-                    console.log('Error en el servidor');
-                  } else {
-                    if (this.respuestaImagenEnviada.code === 200 && this.respuestaImagenEnviada.status === 'success') {
-                      this.resultadoCarga = 1;
-                    } else {
-                      this.resultadoCarga = 2;
-                    }
-                  }
+                }
+              });
 
-                }, error => {
-                  console.log(<any>error);
-                });
-                this.http.put('/v1/teachers/socialMedias', this.teacher).subscribe(Response => {
-                  if (Response.statusText === 'No Content') {
-                    this.toastr.error('La Red Social ' + this.valueText + ' ya existe', 'Ocurrio un Error');
-                  } else {
-                    this.router.navigate(['/profesores/' + this.teacher.idTeacher]);
-                    this.showSuccess(this.teacher.name);
-                    setTimeout(function () { location.reload(true); }, 2000);
-                  }
-                });
-              }
-              if (this.valueText !== '' && this.value.text !== undefined && this.imageNewUser === undefined) {
-                this.http.put('/v1/teachers/socialMedias', this.teacher).subscribe(Response => {
-                  if (Response.statusText === 'No Content') {
-                    this.toastr.error('La Red Social ' + this.valueText + ' ya existe', 'Ocurrio un Error');
-                  } else {
-                    this.router.navigate(['/profesores/' + this.teacher.idTeacher]);
-                    this.showSuccess(this.teacher.name);
-                    setTimeout(function () { location.reload(true); }, 2000);
-                  }
-                });
-              }
+              this.http.put('/v1/courses/teachers', teacherCourse).subscribe((courseData) => {
+                this.router.navigate(['/profesores/' + this.teacher.idTeacher]);
+                this.showSuccess(this.teacher.name);
+                setTimeout(function () { location.reload(true); }, 2000);
+              });
             }
           }
         }, error => {
@@ -152,7 +160,7 @@ export class ProfesoresComponent {
     } else {
 
       if (this.teacher.name === undefined) {
-        this.toastr.error('Ocurrio un Error', 'Primero debes llenar tu Nombre');
+        this.toastr.error('Ocurrio un Error', 'Faltan Datos Necesarios');
       } else {
 
         this.teacher = {
@@ -167,8 +175,14 @@ export class ProfesoresComponent {
             }
           ]
         };
-
-        if (this.imageNewUser !== undefined && this.valueText !== '' && this.value.text !== undefined) {
+        const teacherCourse = {
+          idCourse: this.course.idCourse,
+          teacher: {
+            idTeacher: this.teacher.idTeacher
+          }
+        };
+        // tslint:disable-next-line:max-line-length
+        if (this.imageNewUser !== undefined && this.valueText !== '' && this.value.text !== undefined && this.course.idCourse !== undefined) {
           this.servicio.postFileImagen(this.imageNewUser, this.teacher.idTeacher).subscribe(response => {
             this.respuestaImagenEnviada = response;
             console.log(this.respuestaImagenEnviada);
@@ -193,8 +207,14 @@ export class ProfesoresComponent {
               setTimeout(function () { location.reload(true); }, 2000);
             }
           });
+          this.http.put('/v1/courses/teachers', teacherCourse).subscribe((courseData) => {
+            this.router.navigate(['/profesores/' + this.teacher.idTeacher]);
+            this.showSuccess(this.teacher.name);
+            setTimeout(function () { location.reload(true); }, 2000);
+          });
         }
-        if (this.valueText !== '' && this.value.text !== undefined && this.imageNewUser === undefined) {
+        // tslint:disable-next-line:max-line-length
+        if (this.valueText !== '' && this.value.text !== undefined && this.imageNewUser === undefined && this.course.idCourse !== undefined) {
           this.http.put('/v1/teachers/socialMedias', this.teacher).subscribe(Response => {
             if (Response.statusText === 'No Content') {
               this.toastr.error('La Red Social ' + this.valueText + ' ya existe', 'Ocurrio un Error');
@@ -203,6 +223,28 @@ export class ProfesoresComponent {
               this.showSuccess(this.teacher.name);
               setTimeout(function () { location.reload(true); }, 2000);
             }
+          });
+          this.http.put('/v1/courses/teachers', teacherCourse).subscribe((courseData) => {
+            this.router.navigate(['/profesores/' + this.teacher.idTeacher]);
+            this.showSuccess(this.teacher.name);
+            setTimeout(function () { location.reload(true); }, 2000);
+          });
+        }
+        // tslint:disable-next-line:max-line-length
+        if (this.valueText !== '' && this.value.text !== undefined && this.imageNewUser === undefined && this.course.idCourse === undefined) {
+          this.http.put('/v1/teachers/socialMedias', this.teacher).subscribe(Response => {
+            if (Response.statusText === 'No Content') {
+              this.toastr.error('La Red Social ' + this.valueText + ' ya existe', 'Ocurrio un Error');
+            } else {
+              this.router.navigate(['/profesores/' + this.teacher.idTeacher]);
+              this.showSuccess(this.teacher.name);
+              setTimeout(function () { location.reload(true); }, 2000);
+            }
+          });
+          this.http.put('/v1/courses/teachers', teacherCourse).subscribe((courseData) => {
+            this.router.navigate(['/profesores/' + this.teacher.idTeacher]);
+            this.showSuccess(this.teacher.name);
+            setTimeout(function () { location.reload(true); }, 2000);
           });
         }
         if (this.imageNewUser !== undefined && this.valueText !== '') {
@@ -224,7 +266,14 @@ export class ProfesoresComponent {
             console.log(<any>error);
           });
         }
-
+        // tslint:disable-next-line:max-line-length
+        if (this.course.idCourse !== undefined ) {
+          this.http.put('/v1/courses/teachers', teacherCourse).subscribe((courseData) => {
+            this.router.navigate(['/profesores/' + this.teacher.idTeacher]);
+            this.showSuccess(this.teacher.name);
+            setTimeout(function () { location.reload(true); }, 2000);
+          });
+        }
       }
     }
   }

@@ -41,9 +41,10 @@
                 <div class="form-group">
                   <b>
                     <label for="formGroupExampleInput"> Curso:</label>
-                    <select class="custom-select" id="inputGroupSelect01" name="idTeacherSocialMedia">
+                    <select class="custom-select" id="inputGroupSelect01" name="idTeacherSocialMedia" [(ngModel)]="course.idCourse">
                       <!--[(ngModel)]="teacher.idTeacherSocialMedia"-->
-                      <option *ngFor="let item of this.course" value={{item.idCourse}}>{{item.name}}</option>
+                      <option *ngFor="let item of this.course"  name="courseSelected"
+                        value={{item.idCourse}}>{{item.name}}</option>
                     </select>
                   </b>
                 </div>

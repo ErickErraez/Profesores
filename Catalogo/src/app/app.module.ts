@@ -24,13 +24,19 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { environment } from '../environments/environment';
 import { LoginComponent } from './login/login.component';
 import { RegistroComponent } from './registro/registro.component';
+import { GuardGuard } from './services/guard.guard';
+import { AuthenticationService } from './services/authentication.service';
+import { IconService } from './services/icon.service';
+import { ImagenService } from './services/imagen.service';
+import { UserService } from './services/user.service';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'registro', component: RegistroComponent },
   { path: 'home', component: HomeComponent },
-  { path: 'profesores/:id', component: ProfesoresComponent },
-  { path: 'cursos/:id', component: CursosComponent },
+  { path: 'profesores/:id', component: ProfesoresComponent, canActivate: [GuardGuard] },
+  { path: 'cursos/:id', component: CursosComponent, canActivate: [GuardGuard] },
   { path: 'not-found', component: NotFoundComponent },
   { path: '**', redirectTo: 'not-found' }
 
@@ -68,7 +74,7 @@ const appRoutes: Routes = [
       preventDuplicates: true,
     })
   ],
-  providers: [],
+  providers: [GuardGuard, AuthenticationService, IconService, ImagenService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
