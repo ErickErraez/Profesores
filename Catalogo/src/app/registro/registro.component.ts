@@ -52,6 +52,9 @@ export class RegistroComponent {
             if (error.code === 'auth/email-already-in-use') {
               this.toastr.error('El correo ya existe', 'Ocurrio un error!');
             }
+            if (error.code === 'auth/invalid-email') {
+              this.toastr.error('El correo no es valido', 'Ocurrio un error!');
+            }
           });
         }
       }

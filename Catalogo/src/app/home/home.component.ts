@@ -60,15 +60,12 @@ export class HomeComponent implements OnInit {
   getAllData() {
     this.http.get(this.urlCourse).subscribe((course) => {
       this.courses = course.json();
-
-      console.log(this.courses);
       this.state = 'final';
     }, error => {
       console.log(error);
     });
     this.http.get(this.urlTeacher).subscribe((teacher) => {
       this.teachers = teacher.json();
-      console.log(this.teachers);
     }, error => {
       console.log(error);
     });

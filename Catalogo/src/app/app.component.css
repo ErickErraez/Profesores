@@ -7,3 +7,11 @@
 li {
   color: rgb(250, 250, 250);
 }
+
+#iconUser {
+  color: blue;
+}
+
+#ocultar {
+  opacity: 0;
+}

@@ -24,7 +24,7 @@
     </ul>
     <ul class="nav justify-content-end" *ngIf="loggedIn">
       <li class="nav-item" *ngIf="logUser">
-        <a routerLink="/profile" class="nav-link textColor">{{this.user.name}}</a>
+        <a routerLink='/profile' class="nav-link textColor">{{this.user.name}}</a>
       </li>
       <li class="nav-item">
         <a class="nav-link textColor" id="logout" (click)="logout()">Logout</a>
@@ -32,7 +32,9 @@
     </ul>
   </div>
 </nav>
+
 <router-outlet></router-outlet>
+
 <div class="p-3 mb-2 bg-dark text-white">
   <div class="container">
     <div class="row">

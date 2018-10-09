@@ -1,0 +1,8 @@
+PRIMERO
+npm install -g firebase-tools
+SEGUNDO 
+NG BUILD
+TERCERO
+firebase login
+CUARTO
+firebase init
