@@ -13,6 +13,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+/**
+ * En esta Clase SoialMedia perteneciente al Model es donde asignaremos las
+ * variables que se van a mapear con la base de datos gracias al ORM 
+ * Hibernate 
+ * 
+ */
 
 @Entity
 @Table(name="social_media")
@@ -32,7 +38,8 @@ public class SocialMedia implements Serializable {
 	@OneToMany
 	@JoinColumn(name="id_social_media")
 	@JsonIgnore
-	private Set<TeacherSocialMedia> teacherSocialMedias;
+	private Set<TeacherSocialMedia> teacherSocialMedias;	
+
 	
 	public SocialMedia(String name, String icon) {
 		super();

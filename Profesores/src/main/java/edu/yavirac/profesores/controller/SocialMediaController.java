@@ -29,6 +29,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+/**
+ * Esta Clase permite agregar una SocialMedia, editarlo ademas 
+ * tambien permite guardar una imagen para la SocialMedia respectiva
+ * 
+ * 
+ */
+
 @Controller
 @RequestMapping("/v1")
 public class SocialMediaController {

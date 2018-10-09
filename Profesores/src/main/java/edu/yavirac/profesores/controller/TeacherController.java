@@ -32,6 +32,16 @@ import edu.yavirac.profesores.service.SocialMediaService;
 import edu.yavirac.profesores.service.TeacherService;
 import edu.yavirac.profesores.util.CustomErrorType;
 
+
+/**
+ * Esta Clase permite agregar un Teacher, editarlo ademas 
+ * tambien permite guardar una imagen para el Teacher respectivo, 
+ * tambien asigna un array de SocialMedias que posea el Teacher
+ * 
+ * 
+ */
+
+
 @Controller
 @RequestMapping(value = "/v1")
 public class TeacherController {

@@ -1,0 +1,8 @@
+com.platzi.profesoresplatzi
+edu.yavirac.profesores
+edu.yavirac.profesores.configuration
+edu.yavirac.profesores.controller
+edu.yavirac.profesores.dao
+edu.yavirac.profesores.model
+edu.yavirac.profesores.service
+edu.yavirac.profesores.util

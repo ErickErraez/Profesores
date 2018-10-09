@@ -33,6 +33,14 @@ import edu.yavirac.profesores.util.CustomErrorType;
 @Controller
 @RequestMapping("/v1")
 
+/**
+ * Esta Clase permite agregar un curso, editarlo ademas 
+ * tambien permite guardar una imagen para el curso respectivo,
+ * tambien guarda un profesor. 
+ * 
+ * 
+ */
+
 public class CourseController {
 	
 	@Autowired

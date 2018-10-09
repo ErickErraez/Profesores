@@ -28,6 +28,7 @@ export class AppComponent {
         }, 500);
         this.userServices.getUsersById(response.uid).valueChanges().subscribe((data) => {
           this.user = data;
+          console.log(this.user);
         });
       } else {
         this.loggedIn = false;
@@ -35,11 +36,14 @@ export class AppComponent {
     }, (error) => {
       this.loggedIn = false;
     });
-
+    console.log(this.user);
   }
 
   logout() {
     this.autorizacionService.logOut();
+    this.rooter.navigate(['home']);
+    this.loggedIn = false;
+    this.user = {};
   }
 }
 

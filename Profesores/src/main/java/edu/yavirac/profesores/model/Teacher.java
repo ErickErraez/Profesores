@@ -16,6 +16,13 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+/**
+ * En esta Clase Teacher perteneciente al Model es donde asignaremos las
+ * variables que se van a mapear con la base de datos gracias al ORM 
+ * Hibernate 
+ * 
+ */
+
 @Entity
 @Table(name="teacher")
 public class Teacher implements Serializable {
@@ -34,11 +41,10 @@ public class Teacher implements Serializable {
 	@OneToMany(mappedBy="teacher")
 	@JsonIgnore
 	private Set<Course> courses;
-	
+		
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name="id_teacher")
 	private Set<TeacherSocialMedia> teacherSocialMedias;
-	
 	
 	public Teacher(String name, String avatar) {
 		super();

@@ -7,10 +7,10 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li routerLinkActive="nav-item active">
+      <li routerLinkActive="nav-item active" *ngIf="this.user.uid">
         <a class="nav-link" routerLink="/profesores/new">Profesores</a>
       </li>
-      <li routerLinkActive="nav-item active">
+      <li routerLinkActive="nav-item active" *ngIf="this.user.uid">
         <a class="nav-link" routerLink="/cursos/new">Cursos<span class="sr-only">(current)</span></a>
       </li>
     </ul>

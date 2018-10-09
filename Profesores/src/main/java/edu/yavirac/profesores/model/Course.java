@@ -14,6 +14,12 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+/**
+ * En esta Clase Course perteneciente al Model es donde asignaremos las
+ * variables que se van a mapear con la base de datos gracias al ORM 
+ * Hibernate 
+ * 
+ */
 @Entity
 @Table(name = "course")
 public class Course implements Serializable {

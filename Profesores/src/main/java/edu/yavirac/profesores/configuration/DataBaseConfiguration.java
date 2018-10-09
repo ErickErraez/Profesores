@@ -13,6 +13,10 @@ import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+/**
+ * Esta clase realiza la coneccion del RestApi con la Base de Datos Mysql y el ORM Hibernate.
+ * */
+
 @Configuration
 @EnableTransactionManagement
 public class DataBaseConfiguration {
@@ -30,7 +34,7 @@ public class DataBaseConfiguration {
 	public DataSource dataSource(){
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-		dataSource.setUrl("jdbc:mysql://localhost:3306/prueba");
+		dataSource.setUrl("jdbc:mysql://localhost:3306/prueba"); 
 		dataSource.setUsername("prueba");
 		dataSource.setPassword("12345678");
 		
