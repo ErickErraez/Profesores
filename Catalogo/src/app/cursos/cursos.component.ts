@@ -3,6 +3,7 @@ import { Http } from '@angular/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { IconService } from '../services/icon.service';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-cursos',
@@ -57,6 +58,7 @@ export class CursosComponent {
   guardarCurso() {
 
     this.course = {
+      idCourse: this.course.idCourse,
       name: this.course.name,
       themes: this.course.themes,
       project: this.course.project
@@ -73,10 +75,9 @@ export class CursosComponent {
           icon: 'null'
         };
         this.http.post(this.urlCourse, this.course).subscribe((response) => {
-
+          console.log(response);
           // tslint:disable-next-line:radix
           this.IdCreado = (parseInt(Object.values(response)[0]));
-          console.log(this.IdCreado);
           this.iconService.postFileImagen(this.imageNewUser, this.IdCreado).subscribe(data => {
             this.respuestaImagenEnviada = response;
             console.log(this.respuestaImagenEnviada);
@@ -97,8 +98,12 @@ export class CursosComponent {
             console.log(<any>error);
           });
         }, (error) => {
-          this.showError(this.course.name);
-          setTimeout(function () { location.reload(true); }, 2000);
+          if (error.statusText !== 'Conflict') {
+            this.showError(this.course.name);
+            setTimeout(function () { location.reload(true); }, 2000);
+          } else {
+            this.toastr.error('El Curso ' + this.course.name + ' ya existe', 'Ocurrio un Error!');
+          }
         });
       }
 
@@ -108,6 +113,7 @@ export class CursosComponent {
         this.toastr.error('Faltan datos del Curso', 'Ocurrio un Error!');
       } else {
         this.http.patch(this.urlCourse + this.id, this.course).subscribe((response) => {
+          console.log(this.course.icon);
           if (this.course.icon !== 'null' && this.imageNewUser !== undefined) {
 
             this.iconService.postFileImagen(this.imageNewUser, this.id).subscribe(data => {

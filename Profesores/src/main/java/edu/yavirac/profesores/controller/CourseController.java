@@ -111,7 +111,7 @@ public class CourseController {
 
 		HttpHeaders headers = new HttpHeaders();
 		headers.setLocation(ucBuilder.path("/v1/courses/{id}").buildAndExpand(course.getIdCourse()).toUri());
-		return new ResponseEntity<String>(headers, HttpStatus.CREATED);
+		return new ResponseEntity<Long>(course.getIdCourse(), HttpStatus.CREATED);
 	}
 
 	// UPDATE

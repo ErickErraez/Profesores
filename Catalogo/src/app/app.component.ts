@@ -28,7 +28,6 @@ export class AppComponent {
         }, 500);
         this.userServices.getUsersById(response.uid).valueChanges().subscribe((data) => {
           this.user = data;
-          console.log(this.user);
         });
       } else {
         this.loggedIn = false;

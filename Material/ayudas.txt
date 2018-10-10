@@ -1,0 +1,11 @@
+API REST
+
+https://desarrolloweb.com/articulos/ventajas-inconvenientes-apirest-desarrollo.html
+
+API REST VS WEB SERVICES
+
+https://social.msdn.microsoft.com/Forums/es-ES/7339f040-f675-4450-a12f-6941b7d1649b/diferencias-entre-una-api-rest-y-web-services?forum=aspnetmvces
+
+https://www.oscarblancarteblog.com/2017/03/06/soap-vs-rest-2/
+
+http://users.dsic.upv.es/~rnavarro/NewWeb/docs/RestVsWebServices.pdf

@@ -40,12 +40,14 @@
                 </div>
                 <div class="form-group">
                   <div *ngFor="let nameOfCourse of this.course">
-                    <b *ngIf="nameOfCourse.teacher.idTeacher === this.teacher.idTeacher">
-                      <label for="formGroupExampleInput"> Curso:</label>
-                      <input name="nameOfCourse.name" [(ngModel)]="nameOfCourse.name" type="text" class="form-control"
-                        placeholder="Ingrese Nombre">
-                      <br>
-                    </b>
+                    <div *ngIf="nameOfCourse.teacher !== null">
+                      <b *ngIf="nameOfCourse.teacher.idTeacher === this.teacher.idTeacher">
+                        <label for="formGroupExampleInput"> Curso:</label>
+                        <input name="nameOfCourse.name" [(ngModel)]="nameOfCourse.name" type="text" class="form-control"
+                          placeholder="Ingrese Nombre">
+                        <br>
+                      </b>
+                    </div>
                   </div>
                 </div>
                 <div class="form-group">

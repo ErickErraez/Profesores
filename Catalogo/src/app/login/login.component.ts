@@ -22,7 +22,6 @@ export class LoginComponent {
       this.toastr.error('Faltan Usuario o Contraseña', 'Ocurrio un error!');
     } else {
       this.authenticacion.loginWithEmail(this.email, this.password).then((data) => {
-        console.log(data);
         this.router.navigate(['home']);
       }).catch((error) => {
         console.log(error);
@@ -30,6 +29,8 @@ export class LoginComponent {
           this.toastr.error('El Usuario no existe', 'Ocurrio un error!');
         } else if (error.code === 'auth/wrong-password') {
           this.toastr.error('La contraseña es Incorrecta', 'Ocurrio un error!');
+        } else if (error.code === 'auth/invalid-email') {
+          this.toastr.error('Ingresa un email valido', 'Ocurrio un error!');
         }
 
       });

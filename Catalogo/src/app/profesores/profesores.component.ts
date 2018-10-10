@@ -50,6 +50,7 @@ export class ProfesoresComponent {
 
     this.http.get('v1/courses').subscribe((course) => {
       this.course = course.json();
+      console.log(this.course);
     });
   }
 
